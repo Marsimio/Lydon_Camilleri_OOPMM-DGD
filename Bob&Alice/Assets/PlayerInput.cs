@@ -2,44 +2,67 @@ using UnityEngine;
 using System.Collections;
 public class PlayerInput : MonoBehaviour
 {
-    Enemy bob, alice; // declare bob and alice
+    GameObject bob, alice; // declare bob and alice
     int playerHP = 10; //This is our hp
+    int playerDMG = 3;
+    Enemy _bob, _alice;
     void Start()
     {
-        bob = new Enemy(5, 2, "Bob");
-        //Bob has 5 hp, 2 damage, and a name of Bob
-        alice = new Enemy(2, 5, "Alice");
-        //Alice has 2 hp, 5 damage, and a name of Alice
+        bob = Instantiate(Resources.Load("Bob"), new Vector3 (-2f, 0f, 0f), Quaternion.identity) as GameObject;
+        alice = Instantiate(Resources.Load("Alice"), new Vector3(2f, 0f, 0f), Quaternion.identity) as GameObject;
+        _bob = bob.GetComponent<Enemy>();
+        _alice = alice.GetComponent<Enemy>();
     }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             //Bob takes damage if Spacebar is pressed
-            bob.TakeDamage();
+            _bob.TakeDamage(playerDMG);
+            win();
+        }
         else if (Input.GetKeyDown(KeyCode.LeftShift))
-            //Alice takes damage if left shift is pressed
-            alice.TakeDamage();
+        {
+            _alice.TakeDamage();
+            win();
+        }
         else if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             //Player takes damage from bob if left control is pressed
-            playerHP -= bob.damage;
+            playerHP -= _bob.damage;
             Debug.Log("Player HP: " + playerHP);
+            win();
         }
         else if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
             //Player takes damage from alice if left alt is pressed
-            playerHP -= alice.damage;
+            playerHP -= _alice.damage;
             Debug.Log("Player HP: " + playerHP);
+            win();
         }
 
-        if (bob.hitpoints < 1)
-            //if bob's hp is under 1, he dies
-            bob.Die();
-        if (alice.hitpoints < 1)
-            //if alice's hp is under 1, she dies
-            alice.Die();
+            
+    }
+    
+    public void win()
+    {
+        if (_bob.hitpoints < 1 && _alice.hitpoints < 1)
+        {
+            Debug.Log("Player Wins!");
+            QuitGame();
+        }
         if (playerHP < 1)
-            //if our hp is under 1, we die
-            Debug.Log("You Died!");
+        {
+            Debug.Log("Player Loses!");
+            QuitGame();
+        }
+        
+    }
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
     }
 }
