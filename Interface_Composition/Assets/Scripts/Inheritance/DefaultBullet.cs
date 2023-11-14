@@ -26,7 +26,7 @@ public class DefaultBullet : MonoBehaviour
     protected void xSpeed()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0.98f;
+        rb.gravityScale = 0.87f;
         Vector2 myforce = new Vector2(xspeed, 0);
         rb.AddForce(myforce);
     }

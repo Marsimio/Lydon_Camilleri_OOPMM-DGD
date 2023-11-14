@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,14 @@ public class BulletControl : MonoBehaviour
         cannonFire = GetComponent<Cannon>();
 
         if (gunFire != null) gunFire.Fire(rb);
-        if (cannonFire != null) cannonFire.Arc(rb);
+        try
+        {
+            cannonFire.Arc(rb);
+        }
+        catch (NullReferenceException ex)
+        {
+            Debug.Log("No horizontal firing");
+        }
     }
 
 }
