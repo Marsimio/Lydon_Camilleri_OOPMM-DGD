@@ -2,12 +2,9 @@ using UnityEngine;
 
 public class CollisionDelete : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnBecameInvisible()
     {
-        if (collision.gameObject.CompareTag("Bullet"))
-        {
-            // Destroy the object when a "bullet" collides with it
-            Destroy(collision.gameObject);
-        }
+        this.gameObject.SetActive(false);
     }
+
 }

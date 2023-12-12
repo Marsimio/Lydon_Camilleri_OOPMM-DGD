@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8576764926539810819}
   - component: {fileID: -5519553535286195982}
   - component: {fileID: 4193837480325442761}
+  - component: {fileID: -5741006696622374437}
   m_Layer: 0
   m_Name: Cannonball
   m_TagString: Bullet
@@ -163,3 +164,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-5741006696622374437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614707705888036983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b0a6c525d3d5b43bbedd0f2249fc83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

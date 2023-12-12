@@ -7,9 +7,9 @@ public class Cannonball : Bullet
 
     [SerializeField] float xspeed;
     // Start is called before the first frame update
-    protected override void Start()
+    protected override void OnEnable()
     {
-        base.Start();
+        base.OnEnable();
         xSpeed();
     }
 

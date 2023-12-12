@@ -14,9 +14,11 @@ public class Bullet : MonoBehaviour
         rb.gravityScale = 0;
     }
 
-    protected virtual void Start()
+    protected virtual void OnEnable()
     {
         Vector2 myforce = transform.up * speed;
         rb.AddForce(myforce, ForceMode2D.Impulse);
     }
+
+
 }

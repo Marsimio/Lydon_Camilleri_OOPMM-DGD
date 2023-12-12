@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class Cannon : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class Cannon : MonoBehaviour
     [SerializeField] GameObject Bullet;
     [SerializeField] GameObject Cannonball;
     private bool canFire = true;
+
+    public ObjectPooling objectPool1;
+    public ObjectPooling objectPool2;
 
     [SerializeField] float continuousFireRate = 1.0f;
 
@@ -29,14 +33,14 @@ public class Cannon : MonoBehaviour
         {
             if (continuousFireCoroutine == null)
             {
-                continuousFireCoroutine = StartCoroutine(ContinuousFiring(Bullet));
+                continuousFireCoroutine = StartCoroutine(ContinuousFiring(objectPool1));
             }
         }
         else if (Input.GetMouseButtonDown(1) && canFire)
         {
             if (continuousFireCoroutine == null)
             {
-                continuousFireCoroutine = StartCoroutine(ContinuousFiring(Cannonball));
+                continuousFireCoroutine = StartCoroutine(ContinuousFiring(objectPool2));
             }
         }
         else if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
@@ -49,6 +53,8 @@ public class Cannon : MonoBehaviour
         }
     }
 
+    
+
     void PointAtMouse()
     {
         Quaternion newrotation = Quaternion.LookRotation(this.transform.position - GameData.MousePos, Vector3.forward);
@@ -59,12 +65,13 @@ public class Cannon : MonoBehaviour
         this.transform.rotation = Quaternion.Slerp(this.transform.rotation, newrotation, Time.deltaTime * 3f);
     }
 
-    IEnumerator ContinuousFiring(GameObject Projectile)
+    IEnumerator ContinuousFiring(ObjectPooling myObjectPool)
     {
         while (true)
         {
             if (canFire)
             {
+                GameObject Projectile = myObjectPool.GetPooledObject();
                 StartCoroutine(FiringSequence(Projectile));
             }
 
@@ -74,14 +81,19 @@ public class Cannon : MonoBehaviour
 
     IEnumerator FiringSequence(GameObject Projectile)
     {
-        canFire = false;
+        if (Projectile != null)
+        {
+            canFire = false;
 
-        GameObject cannonTip = GameObject.Find("CannonTip");
-        Vector3 newPosition = cannonTip.transform.position;
-        Instantiate(Projectile, newPosition, cannonTip.transform.rotation);
+            GameObject cannonTip = GameObject.Find("CannonTip");
+            Vector3 newPosition = cannonTip.transform.position;
+            Projectile.transform.position = newPosition;
+            Projectile.transform.rotation = cannonTip.transform.rotation;
+            Projectile.SetActive(true);
 
-        yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(1.0f);
 
-        canFire = true;
+            canFire = true;
+        }
     }
 }

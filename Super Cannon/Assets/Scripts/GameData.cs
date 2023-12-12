@@ -2,14 +2,20 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
+
 public abstract class GameData : MonoBehaviour
 
 {
 
     private static Vector3 mousePos;
-
     private static float padding = 0f;
+    private static int _playerHealth = 10;
+
+    public static int PlayerHealth
+    {
+        get { return _playerHealth; }
+        set { _playerHealth = value;}
+    }
 
     public static Vector3 MousePos
 
