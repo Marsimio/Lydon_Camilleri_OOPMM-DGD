@@ -91,7 +91,7 @@ public class Cannon : MonoBehaviour
             Projectile.transform.rotation = cannonTip.transform.rotation;
             Projectile.SetActive(true);
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(continuousFireRate);
 
             canFire = true;
         }

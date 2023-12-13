@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Enemy 2
   m_EditorClassIdentifier: 
   enemyprefab: {fileID: 7745439680135656160, guid: 0fc273c4b9b62f84eb6f930fd52e5e08, type: 3}
-  strength: 2
-  hitpoints: 2
-  speed: 2
+  strength: 1
+  hitpoints: 1
+  speed: 1

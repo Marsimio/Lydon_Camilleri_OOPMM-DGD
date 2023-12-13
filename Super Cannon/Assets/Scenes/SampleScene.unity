@@ -582,7 +582,7 @@ MonoBehaviour:
   Cannonball: {fileID: 2614707705888036983, guid: 4a33573b351974d4dbf8e110d39e98d3, type: 3}
   objectPool1: {fileID: 394668859}
   objectPool2: {fileID: 1667636243}
-  continuousFireRate: 0.5
+  continuousFireRate: 0.2
 --- !u!212 &1815558798
 SpriteRenderer:
   m_ObjectHideFlags: 0

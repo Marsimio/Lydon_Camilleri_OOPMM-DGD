@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
             start_hitpoints -= 1;
             if (start_hitpoints <= 0)
             {
+                GameData.Score += start_strength;
+                Debug.Log("Score: " + GameData.Score.ToString());
                 Destroy(this.gameObject);
             }
         }

@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
         while (true)
         {
             int enemyChoice = Random.Range(0, enemyList.Count);
-            Vector3 enemypos = new Vector3(Random.Range(GameData.XMin, GameData.XMax), GameData.YMax);
+            Vector3 enemypos = new Vector3(Random.Range(GameData.XMin, GameData.XMax), GameData.YMax+1);
             GameObject enemyInstance = Instantiate(enemyList[enemyChoice].enemyprefab, enemypos, Quaternion.identity);
             enemyInstance.GetComponent<Enemy>().start_hitpoints = enemyList[enemyChoice].hitpoints;
             enemyInstance.GetComponent<Enemy>().start_strength = enemyList[enemyChoice].strength;
